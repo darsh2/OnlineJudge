@@ -1,0 +1,34 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                                       controllers.Application.index()
+
+# Adding new user
+GET         /authenticate                           controllers.Application.authenticate()
+
+POST        /authenticate/signup                    controllers.Application.addUser()
+POST        /authenticate/login                     controllers.Application.loginUser()
+
+GET         /logout                                 controllers.Application.logout()
+
+# Uploading a new problem
+GET         /adminPreviliges                        controllers.AdminActions.viewOptions()
+POST        /adminPreviliges                        controllers.AdminActions.addProblem()
+GET         /adminPreviliges/viewSubmissions        controllers.AdminActions.viewSubmissions()
+
+# Problems page
+GET         /problems                               controllers.ProblemsController.viewProblems()
+GET         /problems/:id                           controllers.ProblemsController.viewSelectedProblem(id: Long)
+POST        /problems/:id                           controllers.ProblemsController.submitSolution(id: Long)
+
+GET         /problems/:id/submissions               controllers.SubmissionsController.viewProblemSubmissions(id: Long)
+GET         /problems/:id/mysubmissions             controllers.SubmissionsController.viewUserSubmissions(id: Long)
+
+# Submissions
+GET         /submissions                            controllers.SubmissionsController.viewAllSubmissions()
+GET         /submissions/:id                        controllers.SubmissionsController.viewSubmissionCode(user, id1: Long, id: Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                           controllers.Assets.at(path="/public", file)

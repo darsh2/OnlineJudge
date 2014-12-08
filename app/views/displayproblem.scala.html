@@ -1,0 +1,55 @@
+@(filePath: String, problemID: Long, status: String)
+
+@main("Problem " + problemID) {
+    <h1 style="padding-left: 50px">Problem @problemID</h1>
+    <div>
+        <ul class="nav nav-pills" style="padding-left: 50px">
+            <li role="presentation"><a href="@routes.SubmissionsController.viewProblemSubmissions(problemID)">All Submissions</a></li>
+            @if(session().get("handle") != null) {
+                <li role="presentation"><a href="@routes.SubmissionsController.viewUserSubmissions(problemID)">
+                    My Submissions</a></li>
+            }
+        </ul>
+    </div>
+
+    <div style="padding-left: 50px">
+        @if(status.compareTo("AC") == 0) {
+            <h3 style="color: #01DF01">@status</h3>
+        }
+        @if(status.compareTo("WA") == 0) {
+            <h3 style="color: red">@status</h3>
+        }
+        @if(status.compareTo("TLE") == 0) {
+            <h3 style="color: darkslategrey">@status</h3>
+        }
+        @if(status.compareTo("RE") == 0) {
+            <h3 style="color: #000000">@status</h3>
+        }
+        @if(status.compareTo("CE") == 0) {
+            <h3 style="color: #d58512">@status</h3>
+        }
+        @if(status.compareTo("UE") == 0) {
+            <h3 style="color: indigo">@status</h3>
+        }
+    </div>
+
+    @if(session().get("handle") != null) {
+        <div style="padding-left: 50px">
+        @helper.form(action = routes.ProblemsController.submitSolution(problemID), 'enctype -> "multipart/form-data") {
+            Submit Solution: <input type="file" name="solution" id="solution"><br/><button type="submit" onclick="checkUploadedFile()">Submit</button>
+        }
+        </div>
+    }
+    <embed src="@routes.Assets.at("problems/" + filePath + "/problem.html")" type="text/html" style="padding-left: 50px; padding-right: 50px" width="100%"></embed>
+
+    <script type="text/javascript">
+    function checkUploadedFile() {
+    var file = document.getElementById("solution" ).value;
+    if (!(file.indexOf('.java') > -1 || file.indexOf('.c') > -1 || file.indexOf('.cpp') > -1)) {
+    alert("Solution file must be of type .java, .c or .cpp");
+    } else {
+    document.getElementById("fileUploadForm" ).submit();
+    }
+    }
+    </script>
+}

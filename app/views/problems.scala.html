@@ -1,0 +1,26 @@
+@(problems: List[Problem])
+
+@main("Problems") {
+    <h1 style="padding-left: 20px"><font color="#b22222">Problems</font></h1>
+    <div class="panel panel-body">
+        <table id="tableID" class="table table-bordered">
+            <thread>
+                <tr>
+                    <th>Problem #</th>
+                    <th>Problem Name</th>
+                    <th>Successful Submission</th>
+                </tr>
+            </thread>
+
+            <tbody>
+            @for(problem <- problems) {
+                <tr class="active">
+                    <td>@problem.getProblemID</td>
+                    <td><a href="@routes.ProblemsController.viewSelectedProblem(problem.getProblemID)">@problem.getProblemName</a></td>
+                    <td>@problem.getNumSubmissions</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}

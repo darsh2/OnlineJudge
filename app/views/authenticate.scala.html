@@ -1,0 +1,89 @@
+
+@(signUpForm: Form[Application.SignUp], loginForm: Form[Application.Login])
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>DOJ Sign Up</title>
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.11.1.min.js")"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div id="content">
+                <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                    <li class="active"><a data-toggle="tab" href="#signup">Sign Up</a></li>
+                    <li><a data-toggle="tab" href="#login">Login</a></li>
+                </ul>
+
+                <div id="my-tab-content" class="tab-content">
+                    <div class="tab-pane active" id="signup">
+                        @helper.form(routes.Application.addUser()) {
+                            <h1>New User?</h1>
+
+                            @if(signUpForm.hasGlobalErrors) {
+                                <p class="error">@signUpForm.globalError.message</p>
+                            }
+
+                            <p>
+                                <input type="text" name="handle" placeholder="Enter your handle">
+                            </p>
+                            <p>
+                                <input type="text" name="firstname" placeholder="Enter your first name">
+                            </p>
+                            <p>
+                                <input type="text" name="lastname" placeholder="Enter your last name">
+                            </p>
+                            <p>
+                                <input type="text" name="college" placeholder="Enter your college">
+                            </p>
+                            <p>
+                                <input type="password" name="password" placeholder="Password">
+                            </p>
+                            <p>
+                                <input type="password" name="confirm" placeholder="Confirm Password">
+                            </p>
+                            <p>
+                                <button type="submit" href="@routes.Application.addUser()">Register</button>
+                            </p>
+                        }
+                    </div>
+
+                    <div class="tab-pane" id="login">
+                    @helper.form(routes.Application.loginUser()) {
+                        <h1>Existing User?</h1>
+
+                        @if(loginForm.hasGlobalErrors) {
+                            <p class="error">@loginForm.globalError.message</p>
+                        }
+
+                        <p>
+                            <input type="text" name="handle" placeholder="Enter your handle">
+                        </p>
+                        <p>
+                            <input type="password" name="password" placeholder="Password">
+                        </p>
+                        <p>
+                            <button type="submit" href="@routes.Application.loginUser()">Login</button>
+                        </p>
+                    }
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+                $(function(){
+                    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                        // Get the name of active tab
+                        var activeTab = $(e.target).text();
+                        $(".active-tab span").html(activeTab);
+                    });
+                });
+            </script>
+        </div>
+
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
+    </body>
+
+</html>

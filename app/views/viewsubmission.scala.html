@@ -1,0 +1,11 @@
+@(user: String, problemID: String, submissionID: String)
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Submission @submissionID</title>
+</head>
+<body>
+    <embed src="@routes.Assets.at("users/" + user + "/" + problemID + "/" + submissionID + ".java")" style="width: 100%; height: 800px"></embed>
+</body>
+</html>

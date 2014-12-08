@@ -1,0 +1,52 @@
+@main("Admin Dashboard") {
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="/adminPreviliges">Add Problem<span class="sr-only">(current)</span></a></li>
+                    <li><a href="/adminPreviliges/viewSubmissions">User Submission</a></li>
+                    <li><a href="/problems">Problems</a></li>
+                </ul>
+            </div>
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h1 class="page-header">Add Problem</h1>
+
+                @helper.form(action = routes.AdminActions.addProblem(), 'enctype -> "multipart/form-data") {
+                    Problem Statement: <br /> <input type="file" name="problem" id="problem"><br />
+                    Testcases: <br /> <input type="file" name="ip" id="ip"><br />
+                    Output: <br /> <input type="file" name="op" id="op"><br />
+
+                    <p>
+                        <button type="submit" onclick="checkUploads()">Submit</button>
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    function checkUploads() {
+    var file1 = document.getElementById ( "problem" ).value, file2 = document.getElementById ( "ip" ).value, file3 = document.getElementById ( "op" ).value, flag = 0 ;
+
+    if (file1.indexOf (".html") == - 1) {
+    alert( "Problem statement must be a .html file");
+    flag = 1;
+    }
+
+    if (file2.indexOf(".txt") == - 1) {
+    alert("Testcases must be a .txt file");
+    flag = 1;
+    }
+
+    if (file3.indexOf(".txt") == - 1) {
+    alert("Output must be a .txt file");
+    flag = 1;
+    }
+
+    if (flag == 0) {
+    document.getElementById("fileUploadForm").submit( ) ;
+    }
+    }
+    </script>
+}
