@@ -67,7 +67,7 @@
                 <div class="media-body">
                     <h4 class="media-heading">@comment.getUser.getId
                         <small>@comment.getDate</small>
-                        @if(session().get("handle").compareTo("admin") == 0 || session().get("handle").compareTo(comment.getUser.getId) == 0) {
+                        @if(session().get("handle") != null && (session().get("handle").compareTo("admin") == 0 || session().get("handle").compareTo(comment.getUser.getId) == 0)) {
                             <a href="@routes.ProblemsController.deleteComment(problemID, comment.getCommentID)"><small>Delete</small></a>
                         }
                     </h4>
