@@ -64,6 +64,6 @@ public class Application extends Controller {
 
     public static Result logout() {
         session().clear();
-        return ok(views.html.index.render());
+        return redirect(routes.Application.index());
     }
 }
