@@ -13,17 +13,26 @@ POST        /authenticate/login                     controllers.Application.logi
 
 GET         /logout                                 controllers.Application.logout()
 
-# Uploading a new problem
+# Admin previliges
 GET         /adminPreviliges                        controllers.AdminActions.viewOptions()
 POST        /adminPreviliges                        controllers.AdminActions.addProblem()
+# Admin can view all user submissions
 GET         /adminPreviliges/viewSubmissions        controllers.AdminActions.viewSubmissions()
 
 # Problems page
 GET         /problems                               controllers.ProblemsController.viewProblems()
+
+# Display particular problem
 GET         /problems/:id                           controllers.ProblemsController.viewSelectedProblem(id: Long)
 POST        /problems/:id                           controllers.ProblemsController.submitSolution(id: Long)
 
+# Adding and deleting comments for a problem
+POST        /problems/:id/addcomment                controllers.ProblemsController.addComment(id: Long)
+GET        /problems/:id/commentID                  controllers.ProblemsController.deleteComment(id: Long, commentID)
+
+# Submissions for particular problem
 GET         /problems/:id/submissions               controllers.SubmissionsController.viewProblemSubmissions(id: Long)
+# Logged in user's submissions for particular problem
 GET         /problems/:id/mysubmissions             controllers.SubmissionsController.viewUserSubmissions(id: Long)
 
 # Submissions
