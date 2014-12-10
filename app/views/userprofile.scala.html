@@ -1,0 +1,71 @@
+@(user: User, ac: Long, submitted: Long, viewHelpers: List[Application.ViewHelper])
+
+@main(user.getHandle + "'s Profile") {
+    <div class="container">
+        <div class="row">
+            <br/><br/>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">@user.getHandle</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic" src="@routes.Assets.at("images/useravatar.png")" class="img-circle">
+                            </div>
+
+                            <div class=" col-md-9 col-lg-9">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr>
+                                            <td>First Name:</td>
+                                            <td>@user.getFirstName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Name:</td>
+                                            <td>@user.getLastName</td>
+                                        </tr>
+                                        <tr>
+                                            <td>College:</td>
+                                            <td>@user.getCollege</td>
+                                        </tr>
+
+                                        <tr>
+                                        <tr>
+                                            <td>Number of problems solved:</td>
+                                            <td><b style="color: #01DF01">@ac</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total number of submissions:</td>
+                                            <td><b>@submitted</b></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <h4><bold>List of solved problems:</bold></h4>
+                                <table>
+                                    <tbody>
+                                    @for(viewHelper <- viewHelpers) {
+                                        <tr>
+                                        @for(problem <- viewHelper.problems) {
+                                            <td align="left" width="14%">
+                                                <a href="@routes.ProblemsController.viewSelectedProblem(problem.getProblemID)">@problem.getProblemName</a>
+                                            </td>
+                                        }
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

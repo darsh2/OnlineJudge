@@ -10,6 +10,7 @@ import views.html.authenticate;
 import views.html.index;
 import views.html.problems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Application extends Controller {
@@ -31,6 +32,16 @@ public class Application extends Controller {
 
     private static Form<SignUp> signUpForm = Form.form(SignUp.class);
     private static Form<Login> loginForm = Form.form(Login.class);
+
+    public static class ViewHelper {
+        public int count;
+        public ArrayList<Problem> problems;
+
+        public ViewHelper() {
+            count = 0;
+            problems = new ArrayList<>();
+        }
+    }
 
     public static Result index() {
         return ok(views.html.index.render());
@@ -60,6 +71,24 @@ public class Application extends Controller {
             return redirect(controllers.routes.AdminActions.viewOptions());
 
         return redirect(controllers.routes.ProblemsController.viewProblems());
+    }
+
+    public static Result userProfile(String handle) {
+        List<Problem> problems = Submission.getUniqueUserSolvedProblems(handle);
+        ArrayList<ViewHelper> viewHelpers = new ArrayList<>();
+        ViewHelper viewHelper = new ViewHelper();
+
+        for (Problem problem : problems) {
+            if (viewHelper.count == 4) {
+                viewHelpers.add(viewHelper);
+                viewHelper = new ViewHelper();
+            }
+            viewHelper.problems.add(problem);
+            viewHelper.count++;
+        }
+        viewHelpers.add(viewHelper);
+
+        return ok(views.html.userprofile.render(User.getUserByHandle(handle), problems.size() * 1L, Submission.getCountUserSubmissions(handle), viewHelpers));
     }
 
     public static Result logout() {

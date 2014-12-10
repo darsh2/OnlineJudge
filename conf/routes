@@ -13,6 +13,9 @@ POST        /authenticate/login                     controllers.Application.logi
 
 GET         /logout                                 controllers.Application.logout()
 
+# User profile
+GET         /users/:handle                          controllers.Application.userProfile(handle)
+
 # Admin previliges
 GET         /adminPreviliges                        controllers.AdminActions.viewOptions()
 POST        /adminPreviliges                        controllers.AdminActions.addProblem()
