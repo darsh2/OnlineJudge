@@ -2,7 +2,7 @@
 
 @main(title) {
     <h1 style="padding-left: 20px">@title</h1>
-    <div class="panel panel-body">
+    <div class="panel panel-body" style="padding-left: 20px; padding-right: 20px">
         <table id="tableID" class="table table-bordered">
             <thread>
                 <tr>
@@ -18,13 +18,13 @@
             @for(submission <- submissions) {
                 <tr class="active">
                     <td>@submission.getDate</td>
-                    @if(submission.getUser.getId.compareTo(session().get("handle")) == 0) {
+                    @if(session().get("handle") != null && submission.getUser.getId.compareTo(session().get("handle")) == 0) {
                         <td><a href="@routes.SubmissionsController.viewSubmissionCode(submission.getUser.getId, submission.getProblem.getId, submission.getSubmissionID)">@submission.getSubmissionID</a></td>
                     } else {
                         <td>@submission.getSubmissionID</td>
                     }
                     <td><a href="@routes.ProblemsController.viewSelectedProblem(submission.getProblem.getId)">@submission.getProblem.getId</a></td>
-                    <td><a href="#">@submission.getUser.getId</a></td>
+                    <td><a href="@routes.Application.userProfile(submission.getUser.getId)">@submission.getUser.getId</a></td>
                     @if(submission.getStatus.toString.compareTo("AC") == 0) {
                         <td style="color: #01DF01">@submission.getStatus</td>
                     }

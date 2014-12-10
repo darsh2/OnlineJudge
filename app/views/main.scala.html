@@ -21,7 +21,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     @if(session().get("handle") != null) {
-                        <a class="navbar-brand" style="padding-left : 50px">@session().get("handle")</a>
+                        <a class="navbar-brand" style="padding-left : 50px" href="@routes.Application.userProfile(session().get("handle"))">@session().get("handle")</a>
                     } else {
                         <a class="navbar-brand" style="padding-left : 50px">DOJ</a>
                     }
