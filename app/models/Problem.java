@@ -104,4 +104,17 @@ public class Problem {
         List<Problem> problems = Problem.problemCollection.find().toArray();
         return problems;
     }
+
+    /**
+     * Lists all problems by their problem id's
+     * @param problemIDs list of problem id's
+     * @return list of type Problem corresponding to id's
+     */
+    public static List<Problem> getProblemsById(List problemIDs) {
+        List<Problem> problems = new ArrayList<>();
+        for (Object object : problemIDs)
+            problems.add(problemCollection.findOneById(Long.parseLong(object.toString())));
+
+        return problems;
+    }
 }

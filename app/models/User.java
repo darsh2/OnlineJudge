@@ -171,4 +171,8 @@ public class User {
     public static List<User> getAllUsers() {
         return User.usersColl.find().toArray();
     }
+
+    public static User getUserByHandle(String handle) {
+        return usersColl.findOneById(handle);
+    }
 }

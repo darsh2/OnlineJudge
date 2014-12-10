@@ -135,6 +135,15 @@ public class Submission {
     }
 
     /**
+     * Counts the total number of submissions made by a user
+     * @param handle User's handle
+     * @return count of user's submissions
+     */
+    public static long getCountUserSubmissions(String handle) {
+        return submissionColl.find(DBQuery.is("user.$id", handle)).count();
+    }
+
+    /**
      * Lists all submissions made by a user.
      * @param handle User's handle whose submissions are queried
      * @return list of user submissions sorted by time
@@ -155,5 +164,15 @@ public class Submission {
         List<Submission> submissions = submissionColl.find(DBQuery.and(DBQuery.is("user.$id", handle), DBQuery.is("problem.$id", problemID))).toArray();
         Collections.sort(submissions, sortBy);
         return submissions;
+    }
+
+    /**
+     * Lists all unique problems solved by a particular user
+     * @param handle User's handle
+     * @return list of unique problems solved by user
+     */
+    public static List<Problem> getUniqueUserSolvedProblems(String handle) {
+        List problemIDs = submissionColl.distinct("problem.$id", DBQuery.and(DBQuery.is("status", Status.AC), DBQuery.is("user.$id", handle)));
+        return Problem.getProblemsById(problemIDs);
     }
 }
