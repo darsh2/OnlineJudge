@@ -11,6 +11,7 @@ import views.html.index;
 import views.html.problems;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Application extends Controller {
@@ -43,6 +44,17 @@ public class Application extends Controller {
         }
     }
 
+    public static class LeaderboardHelper {
+        public long rank, solved;
+        public String handle;
+
+        public LeaderboardHelper(int rank, long solved, String handle) {
+            this.rank = rank;
+            this.solved = solved;
+            this.handle = handle;
+        }
+    }
+
     public static Result index() {
         return ok(views.html.index.render());
     }
@@ -71,6 +83,31 @@ public class Application extends Controller {
             return redirect(controllers.routes.AdminActions.viewOptions());
 
         return redirect(controllers.routes.ProblemsController.viewProblems());
+    }
+
+    public static Result viewLeaderBoard() {
+        ArrayList<ArrayList<String>> numSolved = new ArrayList<ArrayList<String>>();
+        long numProblems = Problem.getProblemCount() + 1;
+        for (long i = 0; i <= numProblems; i++)
+            numSolved.add(new ArrayList<>());
+
+        List<User> users = User.getAllUsers();
+        for (User user : users)
+            numSolved.get(Submission.getUniqueUserSolvedProblems(user.getHandle()).size()).add(user.getHandle());
+
+        ArrayList<LeaderboardHelper> leaderboard = new ArrayList<>();
+        int pos = 1;
+        for ( ; numProblems > -1; numProblems--) {
+            int count = 0;
+            Collections.sort(numSolved.get((int) numProblems));
+            for (String handle : numSolved.get((int) numProblems)) {
+                leaderboard.add(new LeaderboardHelper(pos, numProblems, handle));
+                count++;
+            }
+            pos += count;
+        }
+
+        return ok(views.html.leaderboard.render(leaderboard));
     }
 
     public static Result userProfile(String handle) {

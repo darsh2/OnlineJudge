@@ -28,6 +28,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="@routes.Application.viewLeaderBoard()">Leaderboard</a></li>
                         @if(session().get("handle") != null) {
                             <li><a href="@routes.Application.logout()" style="padding-right: 50px">Logout</a></li>
                         } else {

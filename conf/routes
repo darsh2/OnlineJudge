@@ -42,5 +42,8 @@ GET         /problems/:id/mysubmissions             controllers.SubmissionsContr
 GET         /submissions                            controllers.SubmissionsController.viewAllSubmissions()
 GET         /submissions/:id                        controllers.SubmissionsController.viewSubmissionCode(user, id1: Long, id: Long)
 
+# LeaderBoard
+GET         /leaderboard                            controllers.Application.viewLeaderBoard()
+
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                           controllers.Assets.at(path="/public", file)

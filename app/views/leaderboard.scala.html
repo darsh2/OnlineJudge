@@ -1,0 +1,27 @@
+@(users : List[Application.LeaderboardHelper])
+
+@main("Leaderboard") {
+    <h1 style="padding-left: 20px">Leaderboard</h1>
+    <div class="panel panel-body" style="padding-left: 20px; padding-right: 20px">
+        <table id="tableID" class="table table-bordered">
+            <thread>
+                <tr>
+                    <th>Rank</th>
+                    <th>Handle</th>
+                    <th>Number Solved</th>
+                </tr>
+            </thread>
+
+            <tbody>
+            @for(user <- users) {
+                <tr class="active">
+                    <td>@user.rank</td>
+                    <td><a href="@routes.Application.userProfile(user.handle)">@user.handle</a></td>
+                    <td>@user.solved</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+}
