@@ -23,7 +23,7 @@
                     @if(session().get("handle") != null) {
                         <a class="navbar-brand" style="padding-left : 50px" href="@routes.Application.userProfile(session().get("handle"))">@session().get("handle")</a>
                     } else {
-                        <a class="navbar-brand" style="padding-left : 50px">DOJ</a>
+                        <a class="navbar-brand" style="padding-left : 50px" href="@routes.Application.index()">DOJ</a>
                     }
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">

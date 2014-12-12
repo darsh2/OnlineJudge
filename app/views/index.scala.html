@@ -1,3 +1,156 @@
 @main("DOJ") {
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="@routes.Assets.at("images/under_the_hood.png")" alt="">
+                    <div class="intro-text">
+                        <span class="name">Do you want to be the magician?</span>
+                        <hr class="star-light">
+                        <span class="skills">Algorithms - Data Structures - Math</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Global Contests Like:</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 portfolio-item">
+                    <a class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="@routes.Assets.at("images/acmicpc.png")" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="@routes.Assets.at("images/googlecodejam.png")" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="@routes.Assets.at("images/hackercup.png")" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <div class="col-sm-4 portfolio-item">
+                    <a class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="@routes.Assets.at("images/tco.png")" class="img-responsive" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>We are here to satisfy your algorithmic appetite. Home to a growing problem archive, you can start polishing your skills practicing here.</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>That's not all, you can add your own problems here and put others to the test!</p>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <a href="@routes.Application.authenticate()" class="btn btn-lg btn-outline">
+                        <i class="fa fa-download"></i> Login/SignUp?
+                    </a>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <a href="@routes.ProblemsController.viewProblems()" class="btn btn-lg btn-outline">
+                        <i class="fa fa-download"></i> View Problems
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Getting Started?</h3>
+                        <a href="#">Read our beginner's guide here!</a>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>Languages we support:</h3>
+                        <p>Currently we support solutions in Java</p>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>Contact us:</h3>
+                        <p>Got any queries? Contact us at </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; 2014
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visble-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <link href="@routes.Assets.at("stylesheets/homepage.css")" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="@routes.Assets.at("javascripts/jquery-1.11.1.min.js")"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="@routes.Assets.at("stylesheets/bootstrap.min.css")"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="@routes.Assets.at("javascripts/classie.js")"></script>
+    <script src="@routes.Assets.at("javascripts/cbpAnimatedHeader.min.js")"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="@routes.Assets.at("javascripts/jqBootstrapValidation.js")"></script>
+    <script src="@routes.Assets.at("javascripts/contact_me.js")"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="@routes.Assets.at("javascripts/freelancer.js")"></script>
 }
