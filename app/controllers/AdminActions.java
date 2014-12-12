@@ -2,6 +2,7 @@ package controllers;
 
 import backend.LocalStorage;
 import models.Submission;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Http.*;
 import play.mvc.Http.MultipartFormData.*;
@@ -13,12 +14,24 @@ import play.mvc.Security;
  */
 @Security.Authenticated(Secured.class)
 public class AdminActions extends Controller {
+    public static class ProblemName {
+        public String problemname;
+
+        public String validate() {
+            if (problemname.length() > 0)
+                return null;
+            return "Problem Name cannot be empty";
+        }
+    }
+
+    private static Form<ProblemName> form = Form.form(ProblemName.class);
+
     /**
      * Action that displays all the admin previliges.
      * @return web page listing admin previliges
      */
     public static Result viewOptions() {
-        return ok(views.html.admin.render());
+        return ok(views.html.admin.render(form));
     }
 
     /**
@@ -28,6 +41,12 @@ public class AdminActions extends Controller {
      * @return Redirects back to admin home page with success or error message
      */
     public static Result addProblem() {
+        Form<ProblemName> filledForm = form.bindFromRequest();
+        if (filledForm.hasErrors())
+            return badRequest(views.html.admin.render(filledForm));
+
+        String problemName = filledForm.get().problemname;
+
         MultipartFormData multipartFormData = request().body().asMultipartFormData();
 
         /*
@@ -44,10 +63,10 @@ public class AdminActions extends Controller {
             flash("Error", "Missing file");
             return redirect(routes.AdminActions.viewOptions());
         } else {
-            if (LocalStorage.saveProblem(filePartP, filePartI, filePartO))
-                return ok(views.html.admin.render());
+            if (LocalStorage.saveProblem(problemName, filePartP, filePartI, filePartO))
+                return ok(views.html.admin.render(form));
             else
-                return badRequest();
+                return badRequest(views.html.admin.render(form));
         }
     }
 

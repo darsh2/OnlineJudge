@@ -29,7 +29,7 @@ public class LocalStorage {
      * @param filePartO FilePart containing the uploaded output file
      * @return true if problem was successfully added, false otherwise
      */
-    public static boolean saveProblem(FilePart filePartP, FilePart filePartI, FilePart filePartO) {
+    public static boolean saveProblem(String problemName, FilePart filePartP, FilePart filePartI, FilePart filePartO) {
         long fileCount = Problem.getProblemCount() + 1;
         String directoryName = Long.toString(fileCount);
         System.out.println(directoryName);
@@ -68,7 +68,7 @@ public class LocalStorage {
             isFileI.close();
             isFileO.close();
 
-            Problem.addProblemToCollection(fileCount, "D");
+            Problem.addProblemToCollection(fileCount, problemName);
 
             return true;
         } catch (Exception e) {
