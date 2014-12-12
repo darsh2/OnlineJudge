@@ -23,7 +23,7 @@
                     } else {
                         <td>@submission.getSubmissionID</td>
                     }
-                    <td><a href="@routes.ProblemsController.viewSelectedProblem(submission.getProblem.getId)">@submission.getProblem.getId</a></td>
+                    <td><a href="@routes.ProblemsController.viewSelectedProblem(submission.getProblem.fetch().getProblemName, submission.getProblem.getId)">@submission.getProblem.getId</a></td>
                     <td><a href="@routes.Application.userProfile(submission.getUser.getId)">@submission.getUser.getId</a></td>
                     @if(submission.getStatus.toString.compareTo("AC") == 0) {
                         <td style="color: #01DF01">@submission.getStatus</td>

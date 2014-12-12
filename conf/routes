@@ -26,12 +26,12 @@ GET         /adminPreviliges/viewSubmissions        controllers.AdminActions.vie
 GET         /problems                               controllers.ProblemsController.viewProblems()
 
 # Display particular problem
-GET         /problems/:id                           controllers.ProblemsController.viewSelectedProblem(id: Long)
-POST        /problems/:id                           controllers.ProblemsController.submitSolution(id: Long)
+GET         /problems/:id                           controllers.ProblemsController.viewSelectedProblem(name, id: Long)
+POST        /problems/:id                           controllers.ProblemsController.submitSolution(name, id: Long)
 
 # Adding and deleting comments for a problem
-POST        /problems/:id/addcomment                controllers.ProblemsController.addComment(id: Long)
-GET        /problems/:id/commentID                  controllers.ProblemsController.deleteComment(id: Long, commentID)
+POST        /problems/:id/addcomment                controllers.ProblemsController.addComment(name, id: Long)
+GET        /problems/:id/commentID                  controllers.ProblemsController.deleteComment(name, id: Long, commentID)
 
 # Submissions for particular problem
 GET         /problems/:id/submissions               controllers.SubmissionsController.viewProblemSubmissions(id: Long)

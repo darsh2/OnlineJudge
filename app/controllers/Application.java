@@ -111,6 +111,9 @@ public class Application extends Controller {
     }
 
     public static Result userProfile(String handle) {
+        if (handle.compareTo("admin") == 0)
+            return redirect(routes.AdminActions.viewOptions());
+
         List<Problem> problems = Submission.getUniqueUserSolvedProblems(handle);
         ArrayList<ViewHelper> viewHelpers = new ArrayList<>();
         ViewHelper viewHelper = new ViewHelper();

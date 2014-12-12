@@ -1,7 +1,7 @@
-@(commentForm: Form[ProblemsController.UserComment], filePath: String, problemID: Long, status: String, comments: List[Comment])
+@(commentForm: Form[ProblemsController.UserComment], filePath: String, problemName: String, problemID: Long, status: String, comments: List[Comment])
 
 @main("Problem " + problemID) {
-    <h1 style="padding-left: 50px">Problem @problemID</h1>
+    <h1 style="padding-left: 50px">@problemName</h1>
     <div>
         <ul class="nav nav-pills" style="padding-left: 50px">
             <li role="presentation"><a href="@routes.SubmissionsController.viewProblemSubmissions(problemID)">All Submissions</a></li>
@@ -35,26 +35,26 @@
 
     @if(session().get("handle") != null) {
         <div style="padding-left: 50px">
-        @helper.form(action = routes.ProblemsController.submitSolution(problemID), 'enctype -> "multipart/form-data") {
+        @helper.form(action = routes.ProblemsController.submitSolution(problemName, problemID), 'enctype -> "multipart/form-data") {
             Submit Solution: <input type="file" name="solution" id="solution"> <br/> <button type="submit" class="btn btn-default" onclick="checkUploadedFile()">Submit</button>
         }
         </div>
     }
 
     <br/>
-    <embed src="@routes.Assets.at("problems/" + filePath + "/problem.html")" type="text/html" style="padding-left: 50px; padding-right: 50px" width="100%"></embed>
-
+    <embed src="@routes.Assets.at("problems/" + filePath + "/problem.html")" type="text/html" style="padding-left: 50px; padding-right: 50px" width="100%" height="1000px"></embed>
+    <br/><br/><br/>
     <div class="col-lg-8" style="padding-left: 50px">
         @if(session().get("handle") != null) {
             <div class="well">
                 <h4>Post a comment:</h4>
-                @helper.form(action = routes.ProblemsController.addComment(problemID)) {
+                @helper.form(action = routes.ProblemsController.addComment(problemName, problemID)) {
                     @if(commentForm.hasGlobalErrors) {
                         <p class="error">@commentForm.globalError().message()</p>
                     }
                     <textarea name="commentbody" class="form-control" rows="3"></textarea>
                     <br/>
-                    <button type="submit" class="btn btn-primary" href="@routes.ProblemsController.addComment(problemID)">Submit</button>
+                    <button type="submit" class="btn btn-primary" href="@routes.ProblemsController.addComment(problemName, problemID)">Submit</button>
                 }
             </div>
         }
@@ -68,7 +68,7 @@
                     <h4 class="media-heading">@comment.getUser.getId
                         <small>@comment.getDate</small>
                         @if(session().get("handle") != null && (session().get("handle").compareTo("admin") == 0 || session().get("handle").compareTo(comment.getUser.getId) == 0)) {
-                            <a href="@routes.ProblemsController.deleteComment(problemID, comment.getCommentID)"><small>Delete</small></a>
+                            <a href="@routes.ProblemsController.deleteComment(problemName, problemID, comment.getCommentID)"><small>Delete</small></a>
                         }
                     </h4>
                     @comment.getComment

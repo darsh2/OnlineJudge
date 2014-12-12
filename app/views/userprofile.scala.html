@@ -50,7 +50,7 @@
                                         <tr>
                                         @for(problem <- viewHelper.problems) {
                                             <td align="left" width="14%">
-                                                <a href="@routes.ProblemsController.viewSelectedProblem(problem.getProblemID)">@problem.getProblemName</a>
+                                                <a href="@routes.ProblemsController.viewSelectedProblem(problem.getProblemName, problem.getProblemID)">@problem.getProblemName</a>
                                             </td>
                                         }
                                         </tr>

@@ -16,7 +16,7 @@
             @for(problem <- problems) {
                 <tr class="active">
                     <td>@problem.getProblemID</td>
-                    <td><a href="@routes.ProblemsController.viewSelectedProblem(problem.getProblemID)">@problem.getProblemName</a></td>
+                    <td><a href="@routes.ProblemsController.viewSelectedProblem(problem.getProblemName, problem.getProblemID)">@problem.getProblemName</a></td>
                     <td>@problem.getNumSubmissions</td>
                 </tr>
             }

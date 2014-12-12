@@ -36,12 +36,12 @@ public class ProblemsController extends Controller {
         return ok(problems.render(Problem.getAllProblems()));
     }
 
-    public static Result viewSelectedProblem(long id) {
+    public static Result viewSelectedProblem(String problemName, long id) {
         String directoryName = Long.toString(id);
-        return ok(views.html.displayproblem.render(form, directoryName, id, "", Comment.getAllComments(id)));
+        return ok(views.html.displayproblem.render(form, directoryName, problemName, id, "", Comment.getAllComments(id)));
     }
 
-    public static Result submitSolution(long id) {
+    public static Result submitSolution(String problemName, long id) {
         MultipartFormData multipartFormData = request().body().asMultipartFormData();
         FilePart filePart = multipartFormData.getFile("solution");
 
@@ -56,20 +56,20 @@ public class ProblemsController extends Controller {
             Problem.update(id);
         }
 
-        return ok(views.html.displayproblem.render(form, Long.toString(id), id, status.toString(), Comment.getAllComments(id)));
+        return ok(views.html.displayproblem.render(form, Long.toString(id), problemName, id, status.toString(), Comment.getAllComments(id)));
     }
 
-    public static Result addComment(long problemID) {
+    public static Result addComment(String problemName, long problemID) {
         Form<UserComment> filledForm = form.bindFromRequest();
         if (filledForm.hasErrors())
-            return badRequest(views.html.displayproblem.render(filledForm, Long.toString(problemID), problemID, "", Comment.getAllComments(problemID)));
+            return badRequest(views.html.displayproblem.render(filledForm, Long.toString(problemID), problemName, problemID, "", Comment.getAllComments(problemID)));
 
         Comment.addComment(session().get("handle"), problemID, filledForm.get().commentbody);
-        return redirect(controllers.routes.ProblemsController.viewSelectedProblem(problemID));
+        return redirect(controllers.routes.ProblemsController.viewSelectedProblem(problemName, problemID));
     }
 
-    public static Result deleteComment(long problemID, String commentID) {
+    public static Result deleteComment(String problemName, long problemID, String commentID) {
         Comment.deleteComment(commentID);
-        return redirect(controllers.routes.ProblemsController.viewSelectedProblem(problemID));
+        return redirect(controllers.routes.ProblemsController.viewSelectedProblem(problemName, problemID));
     }
 }
