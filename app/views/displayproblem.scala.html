@@ -32,7 +32,7 @@
             <h3 style="color: indigo">@status</h3>
         }
     </div>
-
+    <br/>
     @if(session().get("handle") != null) {
         <div style="padding-left: 50px">
         @helper.form(action = routes.ProblemsController.submitSolution(problemName, problemID), 'enctype -> "multipart/form-data") {
@@ -61,11 +61,10 @@
 
         <hr>
 
-            <!-- Posted Comments -->
         @for(comment <- comments) {
             <div class="media">
                 <div class="media-body">
-                    <h4 class="media-heading">@comment.getUser.getId
+                    <h4 class="media-heading" style="color: indigo">@comment.getUser.getId
                         <small>@comment.getDate</small>
                         @if(session().get("handle") != null && (session().get("handle").compareTo("admin") == 0 || session().get("handle").compareTo(comment.getUser.getId) == 0)) {
                             <a href="@routes.ProblemsController.deleteComment(problemName, problemID, comment.getCommentID)"><small>Delete</small></a>
@@ -75,8 +74,7 @@
                 </div>
             </div>
         }
-            <!-- Comment -->
-
+        <br/><br/>
     </div>
     <script type="text/javascript">
     function checkUploadedFile() {

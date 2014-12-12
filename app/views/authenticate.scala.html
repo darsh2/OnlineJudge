@@ -19,10 +19,10 @@
                 <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane active" id="signup">
                         @helper.form(routes.Application.addUser()) {
-                            <h1>New User?</h1>
+                            <h1 style="color: darkblue">New User?</h1>
 
                             @if(signUpForm.hasGlobalErrors) {
-                                <p class="error">@signUpForm.globalError.message</p>
+                                <p class="error" style="color: red">@signUpForm.globalError.message</p>
                             }
 
                             <p>
@@ -44,17 +44,17 @@
                                 <input type="password" name="confirm" placeholder="Confirm Password">
                             </p>
                             <p>
-                                <button type="submit" href="@routes.Application.addUser()">Register</button>
+                                <button type="submit" class="btn btn-social" href="@routes.Application.addUser()">Register</button>
                             </p>
                         }
                     </div>
 
                     <div class="tab-pane" id="login">
                     @helper.form(routes.Application.loginUser()) {
-                        <h1>Existing User?</h1>
+                        <h1 style="color: darkgreen">Existing User?</h1>
 
                         @if(loginForm.hasGlobalErrors) {
-                            <p class="error">@loginForm.globalError.message</p>
+                            <p class="error" style="color: red">@loginForm.globalError.message</p>
                         }
 
                         <p>
@@ -64,7 +64,7 @@
                             <input type="password" name="password" placeholder="Password">
                         </p>
                         <p>
-                            <button type="submit" href="@routes.Application.loginUser()">Login</button>
+                            <button type="submit" class="btn btn-social" href="@routes.Application.loginUser()">Login</button>
                         </p>
                     }
                     </div>

@@ -116,6 +116,8 @@ public class User {
      * @return returns a null String if all details are correctly entered else returns String indicating error
      */
     public static String validate(String handle, String firstName, String lastName, String college, String password, String confirm) {
+        if (handle.length() < 3)
+            return "Handle should consist of 3 or more characters";
         if (handle.matches("[^a-zA-Z@0-9_]"))
             return "Handle can contain only characters: a-z A-z 0-9 @ _";
         User match = usersColl.findOneById(handle);
@@ -127,6 +129,11 @@ public class User {
         if (firstName.matches("[^a-zA-Z.]") || lastName.matches("[^a-zA-Z.]"))
             return "Unexpected character in name";
 
+        if (college.length() < 4)
+            return "College name should be provided";
+
+        if (password.length() < 6)
+            return "Password should consist of atleast 6 characters";
         if (password.compareTo(confirm) != 0)
             return "Passwords don't match";
 

@@ -68,7 +68,7 @@ public class Application extends Controller {
         if (filledForm.hasErrors())
             return badRequest(authenticate.render(filledForm, Form.form(Login.class)));
 
-        return ok(index.render());
+        return redirect(routes.Application.index());
     }
 
     public static Result loginUser() {
